@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Travel Statistics | Travel Tracker</title>
+
+    <!-- External stylesheet -->
+    <link rel="stylesheet" href="/views/styles.css">
+</head>
+
+<body>
+
+    <!-- =====================================
+         NAVIGATION BAR
+    ===================================== -->
+
+    <header class="main-nav">
+
+        <nav class="nav-container" aria-label="Main navigation">
+
+            <!-- Application branding -->
+            <a href="/views/allMyTrips.html" class="nav-brand">
+                ✈ Travel Tracker
+            </a>
+
+            <!-- Navigation links -->
+            <div class="nav-links">
+
+                <a href="/views/allMyTrips.html">
+                    My Trips
+                </a>
+
+                <a href="/features/publicLeaderboard">
+                    Public Leaderboard
+                </a>
+
+                <a href="/features/publicStatistics"
+                   class="active"
+                   aria-current="page">
+                    Statistics
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================
+         MAIN DASHBOARD
+    ===================================== -->
+
+    <main class="dashboard-container">
+
+        <!-- Travel-themed banner -->
+        <section class="travel-banner">
+
+            <p class="banner-label">
+                Travel Tracker / Insights
+            </p>
+
+            <h1>Explore the World</h1>
+
+            <p>
+                Discover travel trends and explore
+                popular destinations.
+            </p>
+
+        </section>
+
+
+        <!-- =====================================
+             SUMMARY STATISTICS
+        ===================================== -->
+
+        <section class="statistics-grid"
+                 aria-label="Travel statistics">
+
+            <!-- Total submitted trips -->
+            <article class="stat-card">
+
+                <div class="stat-icon" aria-hidden="true">
+                    ✈
+                </div>
+
+                <span class="stat-label">
+                    Journeys Shared
+                </span>
+
+                <strong class="stat-value">
+                    <%= totalTrips %>
+                </strong>
+
+                <p class="stat-description">
+                    Total trips submitted to the leaderboard
+                </p>
+
+            </article>
+
+
+            <!-- Most popular destination -->
+            <article class="stat-card">
+
+                <div class="stat-icon" aria-hidden="true">
+                    🌍
+                </div>
+
+                <span class="stat-label">
+                    Most Explored Destination
+                </span>
+
+                <strong class="stat-value">
+                    <%= mostPopularDestination || "None yet" %>
+                </strong>
+
+                <p class="stat-description">
+                    The most frequently visited destination
+                </p>
+
+            </article>
+
+        </section>
+
+
+        <!-- =====================================
+             DESTINATION POPULARITY
+        ===================================== -->
+
+        <section class="popularity-card">
+
+            <div class="popularity-header">
+
+                <h2>Popular Destinations</h2>
+
+                <p>
+                    Discover which destinations appear
+                    most often in submitted trips.
+                </p>
+
+            </div>
+
+
+            <!--
+                Convert destinationFrequency into an array.
+
+                Example:
+                { Japan: 2, Australia: 1 }
+
+                Becomes:
+                [["Japan", 2], ["Australia", 1]]
+
+                Sort by highest visit count first.
+            -->
+            <%
+                const destinations = Object.entries(
+                    destinationFrequency || {}
+                ).sort(
+                    (a, b) => Number(b[1]) - Number(a[1])
+                );
+
+                // Find the largest visit count
+                const maxVisits = Math.max(
+                    1,
+                    ...destinations.map(
+                        ([name, count]) => Number(count) || 0
+                    )
+                );
+            %>
+
+
+            <!-- Display an empty state if no data exists -->
+            <% if (destinations.length === 0) { %>
+
+                <p class="empty-message">
+                    No destination statistics available yet.
+                </p>
+
+            <% } else { %>
+
+                <div class="destination-list">
+
+                    <!-- Loop through each destination -->
+                    <% destinations.forEach(([name, count]) => { %>
+
+                        <div class="destination-item">
+
+                            <!-- Destination icon -->
+                            <div class="destination-icon"
+                                 aria-hidden="true">
+                                📍
+                            </div>
+
+
+                            <!-- Destination information -->
+                            <div class="destination-content">
+
+                                <div class="destination-heading">
+
+                                    <!-- Destination name -->
+                                    <span class="destination-name">
+                                        <%= name %>
+                                    </span>
+
+                                    <!-- Number of visits -->
+                                    <span class="destination-count">
+                                        <%= count %>
+                                        <%= Number(count) === 1
+                                            ? "visit"
+                                            : "visits" %>
+                                    </span>
+
+                                </div>
+
+
+                                <!--
+                                    Popularity progress bar.
+
+                                    Store the visit count and maximum
+                                    as HTML data attributes.
+
+                                    JavaScript will calculate the width.
+                                -->
+                                <div class="progress-track"
+                                     role="progressbar"
+                                     aria-label="<%= name %> visits"
+                                     aria-valuenow="<%= Number(count) %>"
+                                     aria-valuemin="0"
+                                     aria-valuemax="<%= maxVisits %>">
+
+                                    <div class="progress-fill"
+                                         data-count="<%= Number(count) %>"
+                                         data-max="<%= maxVisits %>">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <% }) %>
+
+                </div>
+
+            <% } %>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+         PROGRESS BAR JAVASCRIPT
+    ===================================== -->
+
+    <script>
+
+        // Find all destination popularity bars
+        const progressBars = document.querySelectorAll(
+            ".progress-fill"
+        );
+
+        // Calculate the width of each progress bar
+        progressBars.forEach((bar) => {
+
+            // Read the values stored in the HTML attributes
+            const count = Number(bar.dataset.count);
+            const max = Number(bar.dataset.max);
+
+            // Calculate percentage relative to the highest count
+            const percentage = max > 0
+                ? (count / max) * 100
+                : 0;
+
+            // Keep the percentage between 0 and 100
+            const safePercentage = Math.min(
+                100,
+                Math.max(0, percentage)
+            );
+
+            // Apply the calculated width
+            bar.style.width = `${safePercentage}%`;
+
+        });
+
+    </script>
+
+</body>
+</html>

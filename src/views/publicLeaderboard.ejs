@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Public Leaderboard | Travel Tracker</title>
+
+    <!-- Shared stylesheet for the leaderboard -->
+    <link rel="stylesheet" href="/views/styles.css">
+</head>
+
+<body>
+
+    <!-- Main navigation -->
+    <header class="main-nav">
+        <nav class="nav-container" aria-label="Main navigation">
+
+            <a href="/views/allMyTrips.html" class="nav-brand">
+                ✈ Travel Tracker
+            </a>
+
+            <div class="nav-links">
+                <a href="/views/allMyTrips.html">
+                    My Trips
+                </a>
+
+                <a href="/features/publicLeaderboard"
+                   class="active"
+                   aria-current="page">
+                    Public Leaderboard
+                </a>
+
+                <a href="/features/publicStatistics">
+                    Statistics
+                </a>
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- Main leaderboard content -->
+    <main class="leaderboard-container">
+
+        <section class="leaderboard-header">
+            <h1>Public Leaderboard</h1>
+
+            <p>
+                Explore trips submitted by travellers
+                and compare their journeys.
+            </p>
+        </section>
+
+        <!-- Display a message when no trips are submitted -->
+        <% if (leaderboardData.length === 0) { %>
+
+            <section class="leaderboard-empty">
+
+                <h2>No Trips Submitted Yet</h2>
+
+                <p>
+                    Create a trip and submit it to
+                    appear on the leaderboard.
+                </p>
+
+                <a href="/views/allMyTrips.html"
+                   class="leaderboard-button">
+                    View My Trips
+                </a>
+
+            </section>
+
+        <% } else { %>
+
+            <!-- Display the number of submitted trips -->
+            <section class="leaderboard-overview">
+
+                <h2>Submitted Trips</h2>
+
+                <p>
+                    <%= leaderboardData.length %>
+                    <%= leaderboardData.length === 1
+                        ? "trip submitted"
+                        : "trips submitted" %>
+                </p>
+
+            </section>
+
+            <!-- Container holding the submitted trip cards -->
+            <div class="leaderboard-grid">
+
+                <% leaderboardData.forEach((trip, index) => { %>
+
+                    <article class="leaderboard-card">
+
+                        <!-- Trip name and leaderboard ranking -->
+                        <div class="leaderboard-card-header">
+
+                            <div>
+                                <span class="leaderboard-rank">
+                                    Rank #<%= index + 1 %>
+                                </span>
+
+                                <h3><%= trip.name %></h3>
+
+                                <p>
+                                    <%= trip.numberOfDestinations %>
+                                    destinations
+                                </p>
+                            </div>
+
+                            <!-- Total distance displayed as a badge -->
+                            <span class="leaderboard-distance-badge">
+                                <%= Number(trip.distanceTravelled).toLocaleString() %>
+                                km
+                            </span>
+
+                        </div>
+
+                        <!-- Trip statistics -->
+                        <div class="leaderboard-stats">
+
+                            <div class="leaderboard-stat">
+                                <span>Distance Travelled</span>
+
+                                <strong>
+                                    <%= Number(trip.distanceTravelled).toLocaleString() %>
+                                    km
+                                </strong>
+                            </div>
+
+                            <div class="leaderboard-stat">
+                                <span>Destinations</span>
+
+                                <strong>
+                                    <%= trip.numberOfDestinations %>
+                                </strong>
+                            </div>
+
+                            <div class="leaderboard-stat">
+                                <span>Hotels</span>
+
+                                <strong>
+                                    <%= trip.numberOfHotels ?? 0 %>
+                                </strong>
+                            </div>
+
+                            <div class="leaderboard-stat">
+                                <span>Total Nights</span>
+
+                                <strong>
+                                    <%= trip.nightsStayed ?? 0 %>
+                                </strong>
+                            </div>
+
+                        </div>
+
+                        <!-- Travel itinerary -->
+                        <section class="leaderboard-itinerary">
+
+                            <h4>Travel Itinerary</h4>
+
+                            <% if (
+                                Array.isArray(trip.destinations) &&
+                                trip.destinations.length > 0
+                            ) { %>
+
+                                <div class="leaderboard-destinations">
+
+                                    <% trip.destinations.forEach(
+                                        (destination, destinationIndex) => {
+                                    %>
+
+                                        <div class="leaderboard-destination">
+
+                                            <!-- Destination number -->
+                                            <div class="leaderboard-destination-number">
+                                                <%= destinationIndex + 1 %>
+                                            </div>
+
+                                            <!-- Destination information -->
+                                            <div class="leaderboard-destination-content">
+
+                                                <% if (
+                                                    destination &&
+                                                    typeof destination === "object"
+                                                ) { %>
+
+                                                    <h5>
+                                                        <%= destination.from || "Unknown" %>
+                                                        →
+                                                        <%= destination.to || destination.name || "Unknown" %>
+                                                    </h5>
+
+                                                    <div class="leaderboard-destination-details">
+
+                                                        <p>
+                                                            <strong>Distance:</strong>
+                                                            <%= Number(destination.distance_km || 0).toLocaleString() %>
+                                                            km
+                                                        </p>
+
+                                                        <p>
+                                                            <strong>Hotel:</strong>
+                                                            <%= destination.hotel || "No hotel selected" %>
+                                                        </p>
+
+                                                        <p>
+                                                            <strong>Nights:</strong>
+                                                            <%= destination.nights ?? 0 %>
+                                                        </p>
+
+                                                    </div>
+
+                                                <% } else { %>
+
+                                                    <!-- Support older destination data -->
+                                                    <h5><%= destination %></h5>
+
+                                                    <p>
+                                                        Additional trip details unavailable.
+                                                    </p>
+
+                                                <% } %>
+
+                                            </div>
+
+                                        </div>
+
+                                    <% }) %>
+
+                                </div>
+
+                            <% } else { %>
+
+                                <p>
+                                    No itinerary information available.
+                                </p>
+
+                            <% } %>
+
+                        </section>
+
+                        <!-- Delete button for this server submission -->
+                        <div class="leaderboard-actions">
+
+                            <button
+                                type="button"
+                                class="leaderboard-delete-button"
+                                data-trip-id="<%= trip.id %>">
+                                Delete Submission
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                <% }) %>
+
+            </div>
+
+        <% } %>
+
+    </main>
+
+    <!-- Handle deletion of submitted trips -->
+    <script>
+
+        // Find every Delete Submission button.
+        const deleteButtons = document.querySelectorAll(
+            ".leaderboard-delete-button"
+        );
+
+        // Attach a click event listener to each button.
+        deleteButtons.forEach(button => {
+
+            button.addEventListener("click", async () => {
+
+                // Retrieve the ID of the selected trip.
+                const tripId = button.dataset.tripId;
+
+                // Make sure the trip has a valid ID.
+                if (!tripId) {
+                    alert("Unable to identify this trip.");
+                    return;
+                }
+
+                // Ask for confirmation before deleting.
+                const confirmed = window.confirm(
+                    "Are you sure you want to remove this trip from the Public Leaderboard?"
+                );
+
+                // Stop if the user cancels.
+                if (!confirmed) {
+                    return;
+                }
+
+                // Disable the button to prevent repeated clicks.
+                button.disabled = true;
+                button.textContent = "Deleting...";
+
+                try {
+
+                    // Send a DELETE request to the Express API.
+                    const response = await fetch(
+                        `/api/deleteTrip/${encodeURIComponent(tripId)}`,
+                        {
+                            method: "DELETE"
+                        }
+                    );
+
+                    // Handle unsuccessful responses.
+                    if (!response.ok) {
+                        throw new Error(
+                            `Deletion failed: ${response.status}`
+                        );
+                    }
+
+                    // Refresh the page after successful deletion.
+                    // This updates the cards, rankings and trip count.
+                    window.location.reload();
+
+                } catch (error) {
+
+                    console.error("Error deleting trip:", error);
+
+                    alert(
+                        "Unable to delete the trip. Please try again."
+                    );
+
+                    // Restore the button if the request fails.
+                    button.disabled = false;
+                    button.textContent = "Delete Submission";
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>

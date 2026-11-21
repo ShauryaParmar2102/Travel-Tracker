@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>New / Edit Trip | Travel Tracker</title>
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- Trip planner controller -->
+    <script
+        type="module"
+        src="../controllers/newEditController.mjs"
+        defer>
+    </script>
+</head>
+
+<body>
+
+    <!-- ==========================================
+         MAIN NAVIGATION
+         ========================================== -->
+
+    <header class="main-nav">
+
+        <nav class="nav-container" aria-label="Main navigation">
+
+            <!-- Application branding -->
+            <a href="/views/allMyTrips.html" class="nav-brand">
+                ✈ Travel Tracker
+            </a>
+
+            <!-- Navigation links -->
+            <div class="nav-links">
+
+                <a href="/views/allMyTrips.html">
+                    My Trips
+                </a>
+
+                <a href="/features/publicLeaderboard">
+                    Public Leaderboard
+                </a>
+
+                <a href="/features/publicStatistics">
+                    Statistics
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ==========================================
+         PAGE HEADER
+         ========================================== -->
+
+    <section class="page-header">
+
+        <div class="header-content">
+
+            <p class="eyebrow">
+                TRAVEL TRACKER
+            </p>
+
+            <h1>Plan Your Trip</h1>
+
+            <p>
+                Create your holiday itinerary
+                and manage your destinations.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         MAIN TRIP PLANNER
+         ========================================== -->
+
+    <main class="page-container">
+
+        <!-- ======================================
+             TRIP DETAILS
+             ====================================== -->
+
+        <section class="panel">
+
+            <h2>Trip Details</h2>
+
+            <div class="form-group">
+
+                <label for="inpDestinationName">
+                    Trip Name
+                </label>
+
+                <input
+                    type="text"
+                    id="inpDestinationName"
+                    placeholder="e.g. Summer Holiday Adventure"
+                    required
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             BUILD YOUR ITINERARY
+             ====================================== -->
+
+        <section class="panel">
+
+            <h2>Build Your Itinerary</h2>
+
+            <p class="section-description">
+                Add destinations and choose accommodation
+                for your trip.
+            </p>
+
+            <div id="destinations-wrapper">
+
+                <!-- Destination selection -->
+                <div class="selection-card">
+
+                    <h3>Destination</h3>
+
+                    <label for="SelectDestinationBox">
+                        Select Destination
+                    </label>
+
+                    <select id="SelectDestinationBox"></select>
+
+                    <input
+                        type="button"
+                        value="+ Add Destination"
+                        id="btnAddDestination"
+                    >
+
+                </div>
+
+
+                <!-- Hotel selection -->
+                <div class="selection-card">
+
+                    <h3>Accommodation</h3>
+
+                    <label for="SelectHotelBox">
+                        Select Hotel
+                    </label>
+
+                    <select id="SelectHotelBox"></select>
+
+                    <input
+                        type="button"
+                        value="+ Add Hotel"
+                        id="btnAddHotel"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             YOUR ITINERARY
+             ====================================== -->
+
+        <section class="panel">
+
+            <h2>Your Itinerary</h2>
+
+            <p class="section-description">
+                Review your destinations, hotel stays
+                and travel distances.
+            </p>
+
+            <!-- Destinations are inserted here by JavaScript -->
+            <div id="divDestinationsContainer"></div>
+
+        </section>
+
+
+        <!-- ======================================
+             TRIP ACTION BUTTONS
+             ====================================== -->
+
+        <section class="trip-actions">
+
+            <!-- Save trip to localStorage -->
+            <input
+                type="button"
+                value="Save Trip"
+                id="btnSave"
+            >
+
+            <!-- Submit trip to the server leaderboard -->
+            <input
+                type="button"
+                value="Send to Leaderboard"
+                id="btnPost"
+            >
+
+            <!-- Display submission feedback -->
+            <p
+                id="postMessage"
+                role="status"
+                aria-live="polite">
+            </p>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

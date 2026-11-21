@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>All My Trips | Travel Tracker</title>
+
+    <!-- External stylesheet -->
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- JavaScript controller for displaying saved trips -->
+    <script
+        type="module"
+        src="../controllers/allMyTripsController.mjs"
+        defer>
+    </script>
+</head>
+
+<body>
+
+    <!-- =====================================
+         MAIN NAVIGATION
+    ===================================== -->
+
+    <header class="main-nav">
+
+        <nav class="nav-container"
+             aria-label="Main navigation">
+
+            <!-- Application branding -->
+            <a href="/views/allMyTrips.html"
+               class="nav-brand">
+                ✈ Travel Tracker
+            </a>
+
+            <!-- Navigation links -->
+            <div class="nav-links">
+
+                <a href="/views/allMyTrips.html"
+                   class="active"
+                   aria-current="page">
+                    My Trips
+                </a>
+
+                <a href="/features/publicLeaderboard">
+                    Public Leaderboard
+                </a>
+
+                <a href="/features/publicStatistics">
+                    Statistics
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================
+         MAIN PAGE CONTENT
+    ===================================== -->
+
+    <main class="trips-page">
+
+        <!-- =====================================
+             SAVED TRIPS HEADING
+        ===================================== -->
+
+        <section class="trips-header">
+
+            <!-- Page heading and description -->
+            <div class="trips-heading">
+
+                <h1>Your Saved Trips</h1>
+
+                <p>
+                    Explore and manage your saved adventures.
+                    View, edit or delete your holiday plans.
+                </p>
+
+            </div>
+
+
+            <!-- Create a new trip -->
+            <a href="/views/newEditTrip.html"
+               class="new-trip-link">
+                + New Trip
+            </a>
+
+        </section>
+
+
+        <!-- =====================================
+             SAVED TRIPS LIST
+        ===================================== -->
+
+        <section aria-label="Saved trips">
+
+            <!--
+                JavaScript dynamically generates
+                the saved trip cards inside this div.
+
+                Do not rename the ID because the
+                allMyTripsController.mjs file uses it.
+            -->
+            <div id="DestinationsContainer"
+                 class="trips-grid">
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trip Summary | Travel Tracker</title>
+
+    <!-- Shared frontend stylesheet -->
+    <link rel="stylesheet" href="/views/styles/styles.css">
+
+    <!-- Trip summary controller -->
+    <script
+        type="module"
+        src="/controllers/mySummaryController.mjs"
+        defer>
+    </script>
+</head>
+
+<body>
+
+    <!-- ==========================================
+         MAIN NAVIGATION
+         ========================================== -->
+
+    <header class="main-nav">
+        <nav class="nav-container" aria-label="Main navigation">
+
+            <!-- Application branding -->
+            <a href="/views/allMyTrips.html" class="nav-brand">
+                ✈ Travel Tracker
+            </a>
+
+            <!-- Navigation links -->
+            <div class="nav-links">
+
+                <a href="/views/allMyTrips.html">
+                    My Trips
+                </a>
+
+                <a href="/features/publicLeaderboard">
+                    Public Leaderboard
+                </a>
+
+                <a href="/features/publicStatistics">
+                    Statistics
+                </a>
+
+            </div>
+
+        </nav>
+    </header>
+
+
+    <!-- ==========================================
+         PAGE HEADING
+         ========================================== -->
+
+    <section class="summary-page-header">
+        <div class="summary-header-content">
+
+            <h1>Trip Summary</h1>
+
+            <p>
+                Review your journey, costs and accommodation.
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- ==========================================
+         MAIN SUMMARY CONTENT
+         ========================================== -->
+
+    <main class="summary-page">
+
+        <!-- Trip name -->
+        <section class="summary-heading">
+
+            <h2 id="TripName">Trip</h2>
+
+            <p>Your travel overview</p>
+
+        </section>
+
+
+        <!-- ======================================
+             TRIP STATISTICS
+             ====================================== -->
+
+        <section
+            class="summary-stats"
+            aria-label="Trip statistics">
+
+            <!-- Number of hotels -->
+            <div class="summary-stat-card">
+
+                <span class="stat-label">
+                    Hotels
+                </span>
+
+                <span
+                    class="stat-number"
+                    id="numberOfHotels">
+                    0
+                </span>
+
+            </div>
+
+
+            <!-- Total nights stayed -->
+            <div class="summary-stat-card">
+
+                <span class="stat-label">
+                    Total Nights
+                </span>
+
+                <span
+                    class="stat-number"
+                    id="totalNights">
+                    0
+                </span>
+
+            </div>
+
+
+            <!-- Total distance travelled -->
+            <div class="summary-stat-card">
+
+                <span class="stat-label">
+                    Distance Travelled
+                </span>
+
+                <span
+                    class="stat-number"
+                    id="totalDistance">
+                    0 km
+                </span>
+
+            </div>
+
+
+            <!-- Total cost per person -->
+            <div class="summary-stat-card">
+
+                <span class="stat-label">
+                    Total Cost Per Person
+                </span>
+
+                <span
+                    class="stat-number"
+                    id="totalCost">
+                    $0.00
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             ITINERARY DETAILS
+             ====================================== -->
+
+        <section class="summary-itinerary">
+
+            <h2>Your Itinerary</h2>
+
+            <!-- JavaScript inserts destinations here -->
+            <div id="DestinationsContainer"></div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
