@@ -17,9 +17,7 @@ This project is a rebuilt and improved version of a previous TAFE Queensland Web
 ![EJS](https://img.shields.io/badge/EJS-B4CA65?style=for-the-badge&logo=ejs&logoColor=black)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
-**Additional technologies:** REST APIs, Local Storage and JSON.
-
-**Additional technologies:** EJS, REST APIs, browser Local Storage and JSON.
+**Additional technologies:** EJS, REST APIs, browser LocalStorage and JSON.
 
 ## ✨ Features
 
