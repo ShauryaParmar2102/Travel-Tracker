@@ -19,6 +19,28 @@ This project is a rebuilt and improved version of a previous TAFE Queensland Web
 
 **Additional technologies:** EJS, REST APIs, browser LocalStorage and JSON.
 
+## 📖 Project Background
+
+Travel Tracker was originally developed as part of my **Web Programming Cluster** unit at TAFE Queensland.
+
+My original submission received an unsatisfactory result because several features were incomplete, particularly the integration between the frontend and backend, saving trip data and displaying submitted trips on the public leaderboard.
+
+After gaining more experience with JavaScript, Node.js, Express and MVC architecture, I decided to revisit the project and rebuild the incomplete functionality.
+
+### 🔧 Improvements Made
+
+- ✅ Fixed the public leaderboard so trips submitted to the server are displayed correctly.
+- ✅ Implemented working trip saving using browser Local Storage.
+- ✅ Improved communication between the frontend and backend.
+- ✅ Replaced placeholder statistics with data calculated from submitted trips.
+- ✅ Improved the trip summary calculations and display.
+- ✅ Redesigned the interface with a more modern, responsive layout.
+- ✅ Added code comments to make the application easier to understand and maintain.
+
+This project demonstrates my progress as a developer and my ability to revisit previous work, identify problems and implement improvements.
+
+**What started as an unsuccessful TAFE assignment has become a completed personal portfolio project.**
+
 ## ✨ Features
 
 ### 🧳 Trip Management
