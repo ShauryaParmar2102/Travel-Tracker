@@ -12,7 +12,6 @@ This project is a rebuilt and improved version of a previous TAFE Queensland Web
 
 
 
-\
 
 
 **Additional technologies:** EJS, REST APIs, browser Local Storage and JSON.
