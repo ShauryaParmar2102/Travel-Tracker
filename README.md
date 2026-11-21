@@ -149,7 +149,7 @@ travel-tracker/
 
 ## 🧠 What I Learned
 
-This project helped me further develop my understanding of:
+This project helped me understand and learn more about:
 
 - JavaScript programming and DOM manipulation.
 - Object-oriented programming using classes and models.
