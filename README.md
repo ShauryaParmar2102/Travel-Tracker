@@ -21,11 +21,13 @@ This project is a rebuilt and improved version of a previous TAFE Queensland Web
 
 ## 📖 Project Background
 
-Travel Tracker was originally developed as part of my **Web Programming Cluster** unit at TAFE Queensland.
+Travel Tracker was originally developed as part of my Web Programming Cluster unit at TAFE Queensland in 2025. Unfortunately, I did not pass the unit on my first attempt.
 
-My original submission received an unsatisfactory result because several features were incomplete, particularly the integration between the frontend and backend, saving trip data and displaying submitted trips on the public leaderboard.
+In 2026, I repeated and successfully passed the Web Programming Cluster, completing a different project. During this time, I gained more experience with JavaScript, Node.js, Express and MVC architecture.
 
-After gaining more experience with JavaScript, Node.js, Express and MVC architecture, I decided to revisit the project and rebuild the incomplete functionality.
+After completing the unit, I decided to revisit my original Travel Tracker application as a personal project. I used the knowledge I had gained to fix issues with the public leaderboard, improve the functionality and redesign the user interface.
+
+This project demonstrates my growth as a web developer and how I applied my new skills to improve an earlier project.
 
 ### 🔧 Improvements Made
 
